@@ -12,6 +12,7 @@ body{
     font-size: 1.6rem;
     font-family:  Helveltica, sans-serif;
     height: 100vh;
+    font-weight: 300;
 }
 
 /*------- MAIN GRID LAYOUT -------*/
@@ -26,16 +27,58 @@ body{
 
     grid-template-columns: 1fr;
     grid-template-rows: 5rem 1fr 5rem;
+    height: 100%;
 }
+
+/*------- HEADER LAYOUT -------*/
+
 .header{
     grid-area: header;
+    background-color: #203040;
+    color: #ffffff;
+    width: 100%;
 }
+.header .nav{
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+.brand a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 2.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.header-links a {
+    text-decoration: none;
+    color: #ffffff;
+    transition: all .2s ease-in-out;
+}
+.header-links a:hover{
+    color: #ff8000;
+}
+
+/*------- CONTENT LAYOUT -------*/
+
 .main{
     grid-area: main;
 }
+
+/*------- FOOTER LAYOUT -------*/
+
+
 .footer{
     grid-area: footer;
+    background-color: #203040;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-
-/*------- MAIN GRID LAYOUT -------*/
