@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%; /* 16px * 62.5 = 10px = 1rem */
+}
+
+body{
+    font-size: 1.6rem;
+    font-family:  Helveltica, sans-serif;
+    height: 100vh;
+}
+
+/*------- MAIN GRID LAYOUT -------*/
+
+
+.grid-container {
+    display: grid;
+    grid-template-areas: 
+    "header"
+    "main"
+    "footer";
+
+    grid-template-columns: 1fr;
+    grid-template-rows: 5rem 1fr 5rem;
+}
+.header{
+    grid-area: header;
+}
+.main{
+    grid-area: main;
+}
+.footer{
+    grid-area: footer;
+}
+
+
+/*------- MAIN GRID LAYOUT -------*/
