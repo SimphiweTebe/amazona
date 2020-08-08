@@ -9,20 +9,28 @@ html{
     font-size: 62.5%; /* 16px * 62.5 = 10px = 1rem */
 }
 
+$greyDark: #203040;
+$greyLight: #c0c0c0;
+$orange: #ff8000;
+$white: #ffffff;
+
+
 body{
     font-size: 1.6rem;
     font-family:  Helveltica, sans-serif;
     height: 100vh;
     font-weight: 400;
+    color: $greyDark;
 }
 
 a{
     text-decoration: none;
     transition: all .2s;
-}
+    
 
-a:hover{
-    color: #ff8000;
+    &:hover{
+        color: $orange;
+    }
 }
 
 ul{
@@ -52,39 +60,62 @@ ul{
 
 .header{
     grid-area: header;
-    background-color: #203040;
-    color: #ffffff;
+    background-color: $greyDark;
+    color: $white;
     width: 100%;
+
+    .nav{
+        width: 90%;
+        max-width: 140rem;
+        margin: 0 auto;
+    
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 100%;
+    }
+
 }
-.header .nav{
-    width: 90%;
-    max-width: 140rem;
-    margin: 0 auto;
+
+
+.brand{
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    min-height: 100%;
+
+    a {
+        text-decoration: none;
+        color: $white;
+        font-size: 2.2rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+    }
+
+    button{
+        font-size: 2.5rem;
+        padding: .5rem;
+        background: none;
+        border: none;
+        color: $white;
+        cursor: pointer;
+        margin-right: 1rem;
+    }
+
 }
-.brand{
-    display: flex;
-    align-items: center;
-}
-.brand a {
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 2.2rem;
-    font-weight: 500;
-    letter-spacing: 1px;
-}
+
 .header-links a {
+
     text-decoration: none;
-    color: #ffffff;
+    color: $white;
     transition: all .2s ease-in-out;
+    padding-left: 2rem;
+
+    &:hover{
+        color: $orange;
+    }
+
 }
-.header-links a:hover{
-    color: #ff8000;
-}
+
 
 .main{
     grid-area: main;
@@ -101,49 +132,49 @@ ul{
     flex-wrap: wrap;
     max-width: 144rem;
     margin: 0 auto;
+
+    li{
+        flex: 0 1 34rem;
+        margin: 1rem;
+        border-bottom: .1rem solid $greyLight;
+    }
+
 }
 
-.products li{
-    flex: 0 1 34rem;
-    margin: 1rem;
-    border-bottom: .1rem solid #c0c0c0;
-}
+
 
 .product{
+
     padding: 0 0 3rem;
-}
-.product__image{
-    width: 100%;
-    max-height: 34rem;
-    max-width: 34rem;
-    display: block;
-}
-.product__name{
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    display: block;
-}
-.product__brand{
-    font-size: 1.8rem;
-    margin-bottom: .5rem;
-}
-.product__price{
-    font-size: 1.7rem;
-    margin-bottom: .5rem;
+
+    &__image{
+        width: 100%;
+        max-height: 34rem;
+        max-width: 34rem;
+        display: block;
+    }
+
+    &__name{
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        display: block;
+        color: $greyDark;
+    }
+
+    &__brand{
+        font-size: 1.8rem;
+        margin-bottom: .5rem;
+    }
+
+    &__price{
+        font-size: 1.7rem;
+        margin-bottom: .5rem;
+    }
+
 }
 
 /*------- SIDEBAR MENU -------*/
-
-.brand button{
-    font-size: 2.5rem;
-    padding: .5rem;
-    background: none;
-    border: none;
-    color: #ffffff;
-    cursor: pointer;
-    margin-right: 1rem;
-}
 
 .sidebar{
     position: fixed;
@@ -151,8 +182,8 @@ ul{
     transform: translateX(-30rem);
     width: 30rem;
     height: 100%;
-    background-color: #f0f0f0;
-    color: #203040;
+    background-color: $white;
+    color: $greyDark;
     padding: 3rem 2rem;
     transition: all .2s ease-in-out;
 }
@@ -164,8 +195,8 @@ ul{
     right: 2rem;
     top: 2.5rem;
     border: none;
-    background: #203040;
-    color: #ffffff;
+    background: $greyDark;
+    color: $white;
     padding: .3rem 1rem;
     border-radius: 50%;
     font-size: 2.5rem;
@@ -176,13 +207,13 @@ ul{
 }
 .sidebar li a{
     /* margin-bottom: 1.5rem; */
-    color: #203040;
+    color: $greyDark;
     display: block;
     padding: 1rem .8rem;
 }
 .sidebar li a:hover{
-    background: #203040;
-    color: #f0f0f0;
+    background: $greyDark;
+    color: $white;
 }
 
 
@@ -191,8 +222,8 @@ ul{
 
 .footer{
     grid-area: footer;
-    background-color: #203040;
-    color: #ffffff;
+    background-color: $greyDark;
+    color: $white;
     display: flex;
     justify-content: center;
     align-items: center;
