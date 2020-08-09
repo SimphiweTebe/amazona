@@ -10,4 +10,16 @@
 6. Development: ESLint, Babel, Git, Github, 
 7. Deployment: Heroku
 
+# Front-end:
+
+1. React, Router and Redux
+2. Sass
+3. Axios
+4. NPM
+
+# Server-side:
+
+1. Node (Express)
+2. MongoDB
+3. JWT
 
