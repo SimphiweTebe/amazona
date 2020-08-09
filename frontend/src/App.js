@@ -1,5 +1,7 @@
 import React from 'react';
-import data from './data'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import ProductPage from './pages/ProductPage'
 
 function App() {
 
@@ -8,53 +10,48 @@ function App() {
   }
 
   return (
-    <div className="grid-container">
+    <Router>
+      <div className="grid-container">
 
-      <header className="header">
-        <nav className="nav">
-          <div className="brand">
-            <button onClick={toggleMenu}>&#9776;</button>
-            <a href="index.html">Amazona</a>
-          </div>
-          <div className="header-links">
-            <a href="cart.html">Cart</a>
-            <a href="signin.html">Sign In</a>
-          </div>
-        </nav>
-      </header>
+        <header className="header">
+          <nav className="nav">
+            <div className="brand">
+              <button onClick={toggleMenu}>&#9776;</button>
+              <Link to="/">Amazona</Link>
+            </div>
+            <div className="header-links">
+              <Link to="/">Cart</Link>
+              <Link to="/">Sign In</Link>
+            </div>
+          </nav>
+        </header>
 
-      <aside className="sidebar">
-        <h3>Shopping categories</h3>
-        <button className="sidebar__button" onClick={toggleMenu}>&times;</button>
-        <ul>
-          <li><a href="index.html">Sneakers</a></li>
-          <li><a href="index.html">Pants</a></li>
-        </ul>
-      </aside>
-
-      <main className="main">
-        <div className="content">
-          <ul className="products">
-            {
-              data.products.map(product => (
-                <li key={product.id}>
-                  <div className="product">
-                    <img src={product.imageUrl} alt="" className="product__image" />
-                    <a href="product.html" className="product__name">{product.name}</a>
-                    <div className="product__brand">{product.brand}</div>
-                    <div className="product__price">{product.price}</div>
-                    <div className="product__rating">{product.rating} ({product.numReviews} Reviews)</div>
-                  </div>
-                </li>
-              ))
-            }
+        <aside className="sidebar">
+          <h3>Shopping categories</h3>
+          <button className="sidebar__button" onClick={toggleMenu}>&times;</button>
+          <ul>
+            <li><Link to="/">Sneakers</Link></li>
+            <li><Link to="/">Pants</Link></li>
           </ul>
-        </div>
-      </main>
-      <footer className="footer">
-        &copy; {new Date().getFullYear()} Amazona company. All rights reserved.
+        </aside>
+
+        <main className="main">
+          <div className="content">
+
+            <Switch>
+              <Route path="/product/:id" component={ProductPage} />
+              <Route path="/" exact component={HomePage} />
+            </Switch>
+
+          </div>
+        </main>
+
+        <footer className="footer">
+          &copy; {new Date().getFullYear()} Amazona company. All rights reserved.
         </footer>
-    </div>
+
+      </div>
+    </Router>
   );
 }
 
