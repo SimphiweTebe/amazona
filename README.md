@@ -9,5 +9,3 @@
 5. MongoDB: Mongoose, Aggregation
 6. Development: ESLint, Babel, Git, Github, 
 7. Deployment: Heroku
-
-
