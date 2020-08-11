@@ -1,76 +1,80 @@
-import React from 'react';
-//import { Link } from 'react-router-dom';
-import data from '../data';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { fetchSingleProduct } from '../actions/productActions';
+import Loader from '../components/Loader';
 
 function ProductPage(props) {
 
-    //parse ID since its a string not interger -- otherwise will return undefined
-    let id = parseInt(props.match.params.id);
-    const product = data.products.find(x => x._id === id);
+    const [qty, setQty] = useState(1);
+    const productDetails = useSelector(state => state.productDetails);
+    const { product, loading, error } = productDetails;
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+
+        dispatch(fetchSingleProduct(props.match.params.id))
+
+    }, [])
+
+    const handleAddToCart = () => {
+        props.history.push("/cart/" + props.match.params.id + "?qty=" + qty)
+    }
 
     return (
         <>
-            {/* <div className="back__link">
-                <Link to="/">Back</Link>
-            </div> */}
-            <div className="details">
 
-                <div className="details__image">
-                    <img src={product.imageUrl} alt="" />
+            {
+                loading ? <Loader /> :
+                    error ? <h1>{error}</h1> :
 
-                    <ul>
-                        <li>
-                            <h2>{product.brand}</h2>
-                        </li>
-                        <li>
-                            <h4>{product.name}</h4>
-                        </li>
-                        <li>
-                            {product.rating} Stars ({product.numReviews} Reviews)
-                        </li>
-                        <li>
-                            Price: R{product.price}
-                        </li>
-                        <li>
-                            {product.description ? <p>{product.description}</p> : null}
-                        </li>
-                    </ul>
+                        <div className="details">
 
-                </div>
+                            <div className="details__image">
+                                <img src={product.imageUrl} alt="" />
 
-                {/* <div className="details__info">
-                    <ul>
-                        <li>
-                            <h4>{product.name}</h4>
-                        </li>
-                        <li>
-                            {product.rating} Stars ({product.numReviews} Reviews)
-                        </li>
-                        <li>
-                            <strong>R{product.price}</strong>
-                        </li>
-                        <li >
-                            {product.description ? <p>{product.description}</p> : <p>Currently no description!</p>}
-                        </li>
-                    </ul>
-                </div> */}
+                                <ul>
+                                    <li>
+                                        <h2>{product.brand}</h2>
+                                    </li>
+                                    <li>
+                                        <h4>{product.name}</h4>
+                                    </li>
+                                </ul>
 
-                <div className="details__action">
-                    <ul>
-                        <li><strong>Price: R{product.price}</strong></li>
-                        <li>Status: {product.status}</li>
-                        <li>Qty:
-                            <select name="" id="">
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                                <option value="">4</option>
-                            </select>
-                        </li>
-                        <li><button>Add to Cart</button></li>
-                    </ul>
-                </div>
-            </div>
+                            </div>
+
+                            <div className="details__action">
+                                <ul>
+                                    <li><strong>Price: R{product.price}</strong></li>
+                                    <li>Status: {product.countInStock > 0 ? "In Stock" : "Out of Stock"}</li>
+                                    <li>Qty:
+                                        <select value={qty} onChange={(e) => setQty(e.target.value)}>
+                                            {
+                                                [...Array(product.countInStock).keys()].map(x =>
+                                                    <option key={x + 1} value={x + 1}>{x + 1}</option>
+                                                )
+                                            }
+                                        </select>
+                                    </li>
+                                    <li>
+                                        {
+                                            product.countInStock > 0 && <button onClick={handleAddToCart}>Add to Cart</button>
+                                        }
+                                    </li>
+                                </ul>
+                                <ul className="action__footer">
+                                    <li>
+                                        {product.rating} Stars ({product.numReviews} Reviews)
+                                    </li>
+                                    <li>
+                                        {product.description && <p>{product.description}</p>}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+            }
         </>
     )
 }

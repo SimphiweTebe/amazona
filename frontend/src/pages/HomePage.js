@@ -17,8 +17,6 @@ function HomePage(props) {
 
     }, [])
 
-    console.log(products)
-
     return (
         <>
             {
