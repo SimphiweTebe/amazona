@@ -1,27 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+
 import Loader from '../components/Loader';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchProducts } from '../actions/productActions'
 
 function HomePage(props) {
 
-    const [products, setProducts] = useState([]);
-    const [busy, setIsBusy] = useState(true);
+    const productList = useSelector(state => state.productList);
+    const { products, loading, error } = productList;
+    const dispatch = useDispatch()
 
     useEffect(() => {
 
-        const fetchData = async () => {
-            const { data } = await axios.get("/api/products");
-            setProducts(data);
-            setIsBusy(false)
-        }
+        dispatch(fetchProducts());
 
-        fetchData();
-
-        //CLEANUP
-        return () => {
-            //
-        }
     }, [])
 
     console.log(products)
@@ -29,27 +22,29 @@ function HomePage(props) {
     return (
         <>
             {
-                busy && <Loader />
+                loading ? <Loader /> :
+                    error ? <div>{error}</div> :
+
+                        <ul className="products">
+                            {
+                                products && products.map(product => (
+                                    <li key={product._id}>
+                                        <div className="product">
+                                            <Link to={`/product/${product._id}`}>
+                                                <img src={product.imageUrl} alt="" className="product__image" />
+                                            </Link>
+                                            <Link to={`/product/${product._id}`} className="product__name">
+                                                {product.name}
+                                            </Link>
+                                            <div className="product__brand">{product.brand}</div>
+                                            <div className="product__price">{product.price}</div>
+                                            <div className="product__rating">{product.rating} ({product.numReviews} Reviews)</div>
+                                        </div>
+                                    </li>
+                                ))
+                            }
+                        </ul>
             }
-            <ul className="products">
-                {
-                    products.length > 0 && !busy && products.map(product => (
-                        <li key={product._id}>
-                            <div className="product">
-                                <Link to={`/product/${product._id}`}>
-                                    <img src={product.imageUrl} alt="" className="product__image" />
-                                </Link>
-                                <Link to={`/product/${product._id}`} className="product__name">
-                                    {product.name}
-                                </Link>
-                                <div className="product__brand">{product.brand}</div>
-                                <div className="product__price">{product.price}</div>
-                                <div className="product__rating">{product.rating} ({product.numReviews} Reviews)</div>
-                            </div>
-                        </li>
-                    ))
-                }
-            </ul>
         </>
     )
 }

@@ -10,16 +10,23 @@
 6. Development: ESLint, Babel, Git, Github, 
 7. Deployment: Heroku
 
-# Front-end:
+### Front-end:
 
 1. React, Router and Redux
 2. Sass
 3. Axios
 4. NPM
 
-# Server-side:
+### Server-side:
 
 1. Node (Express)
 2. MongoDB
 3. JWT
+
+### Run application:
+
+1. Clone the repository to your local machine.
+2. Install dependencies usin 'npm install'
+3. 
+
 
