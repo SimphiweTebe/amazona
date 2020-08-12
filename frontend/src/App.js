@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import HomePage from './pages/HomePage'
-import ProductPage from './pages/ProductPage'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import ProductPage from './pages/ProductPage';
+import CartPage from './pages/CartPage';
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
 
             <Switch>
               <Route path="/product/:id" component={ProductPage} />
+              <Route path="/cart/:id?" component={CartPage} />
               <Route path="/" exact component={HomePage} />
             </Switch>
 

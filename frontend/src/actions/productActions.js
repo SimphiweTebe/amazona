@@ -16,8 +16,8 @@ const fetchProducts = () => async (dispatch) => {
         const { data } = await axios.get("/api/products");
         dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
 
-    } catch (err) {
-        dispatch({ type: PRODUCT_LIST_FAIL, payload: err.message });
+    } catch (error) {
+        dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
     }
 
 }

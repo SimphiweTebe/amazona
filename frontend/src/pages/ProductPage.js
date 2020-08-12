@@ -47,16 +47,24 @@ function ProductPage(props) {
                             <div className="details__action">
                                 <ul>
                                     <li><strong>Price: R{product.price}</strong></li>
-                                    <li>Status: {product.countInStock > 0 ? "In Stock" : "Out of Stock"}</li>
-                                    <li>Qty:
-                                        <select value={qty} onChange={(e) => setQty(e.target.value)}>
-                                            {
-                                                [...Array(product.countInStock).keys()].map(x =>
-                                                    <option key={x + 1} value={x + 1}>{x + 1}</option>
-                                                )
-                                            }
-                                        </select>
-                                    </li>
+                                    <li>{product.countInStock > 0 ? <p>Status: In Stock</p> : <p className="no-stock">Status: Out of Stock</p>}</li>
+
+                                    {
+                                        product.countInStock > 0 &&
+
+                                        <li>Qty:
+
+                                            <select value={qty} onChange={(e) => setQty(e.target.value)}>
+                                                {
+                                                    [...Array(product.countInStock).keys()].map(x =>
+                                                        <option key={x + 1} value={x + 1}>{x + 1}</option>
+                                                    )
+                                                }
+                                            </select>
+
+                                        </li>
+                                    }
+
                                     <li>
                                         {
                                             product.countInStock > 0 && <button onClick={handleAddToCart}>Add to Cart</button>
